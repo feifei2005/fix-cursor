@@ -32,6 +32,13 @@ pip install pyinstaller
 pyinstaller --onefile --noconsole --name FixCursor fix_cursor.py
 ```
 
+> **Note for conda/Anaconda Python:** `_ctypes.pyd` depends on `ffi.dll` (plus `libmpdec-4.dll`, `liblzma.dll`, `LIBBZ2.dll` for other stdlib modules), which conda keeps in `Library\bin` instead of `DLLs`. If that directory is not on `PATH`, PyInstaller silently omits these DLLs and the built exe crashes with `ImportError: DLL load failed while importing _ctypes`. Build from an Anaconda Prompt, or prepend the directory manually:
+>
+> ```bat
+> set PATH=%CONDA_PREFIX%\Library\bin;%PATH%
+> pyinstaller --onefile --noconsole --name FixCursor fix_cursor.py
+> ```
+
 ### Files
 
 | File            | Description                                        |
@@ -65,6 +72,13 @@ pyinstaller --onefile --noconsole --name FixCursor fix_cursor.py
 pip install pyinstaller
 pyinstaller --onefile --noconsole --name FixCursor fix_cursor.py
 ```
+
+> **conda/Anaconda 用户注意：** `_ctypes.pyd` 依赖 `ffi.dll`（其他标准库模块还依赖 `libmpdec-4.dll`、`liblzma.dll`、`LIBBZ2.dll`），conda 把它们放在 `Library\bin` 而非 `DLLs` 目录。若该目录不在 `PATH` 中，PyInstaller 会静默丢弃这些 DLL，打出的 exe 运行时报 `ImportError: DLL load failed while importing _ctypes`。请在 Anaconda Prompt 中构建，或手动前置该目录：
+>
+> ```bat
+> set PATH=%CONDA_PREFIX%\Library\bin;%PATH%
+> pyinstaller --onefile --noconsole --name FixCursor fix_cursor.py
+> ```
 
 ### 文件说明
 
